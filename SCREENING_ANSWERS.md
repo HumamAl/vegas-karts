@@ -6,7 +6,7 @@
 
 Most relevant to what you're building:
 
-- Vegas Karts demo (built for this proposal): {VERCEL_URL}
+- Vegas Karts demo (built for this proposal): https://vegas-karts.vercel.app
 - Sienna Charles — luxury vendor booking platform with availability management and spend tracking: https://sienna-vendor-admin.vercel.app
 - Lynt Marketplace — vendor onboarding, listings, transaction tracking: https://lynt-marketplace.vercel.app
 - DealerHub — multi-tenant ops platform (inventory, lead pipeline, revenue tracking): https://dealer-platform-neon.vercel.app
