@@ -2,82 +2,96 @@ import type { Profile, PortfolioProject } from "@/lib/types";
 
 export const profile: Profile = {
   name: "Humam",
-  tagline: "Full-stack developer specializing in Next.js applications",
-  bio: "I build MVPs and production apps that solve real operational problems — CRM systems, fleet management platforms, AI-powered dashboards, and e-commerce tools. My approach is straightforward: understand the business need, build something that works, and ship it fast.",
+  tagline:
+    "Full-stack developer who ships MVPs fast — from concept to deployed product in days, not months.",
+  bio: "I build MVPs and production apps that solve real operational problems — booking platforms, marketplace systems, API integrations, and gamified engagement tools. My approach: understand the experience you're selling, build something that reflects it, and ship it fast.",
   approach: [
     {
-      title: "Understand the Problem",
-      description: "Read the full requirements, identify the core pain point",
-    },
-    {
-      title: "Build a Working Demo",
+      title: "Understand the Experience",
       description:
-        "Show, don't tell — a live demo is worth 1000 words of proposal text",
+        "Deep-dive into Vegas Karts' brand identity, circuit operations, and booking flow to understand what makes you different from every other go-kart track in Vegas.",
     },
     {
-      title: "Use Realistic Data",
+      title: "Build the Core",
       description:
-        "Mock data that looks like real client data, not placeholder text",
+        "Cinematic website with OTA-connected booking, membership system, and gamification engine — shipped in focused sprints with working code from day one.",
     },
     {
-      title: "Ship Fast",
-      description: "MVP first, polish later. Get something deployed quickly",
+      title: "Launch & Integrate",
+      description:
+        "App store deployment, Viator / FareHarbor / Booking.com sync, Stripe payments, and analytics — all production-tested before go-live.",
+    },
+    {
+      title: "Grow Together",
+      description:
+        "Ongoing development, new circuit launches, feature iterations, and performance optimisation as a long-term technical partner.",
     },
   ],
   skillCategories: [
     {
       name: "Frontend",
-      skills: [
-        "TypeScript",
-        "React",
-        "Next.js",
-        "Tailwind CSS",
-        "shadcn/ui",
-        "Recharts",
-      ],
+      skills: ["Next.js", "React", "TypeScript", "Tailwind CSS", "React Native"],
     },
     {
-      name: "Backend & APIs",
-      skills: [
-        "Node.js",
-        "REST APIs",
-        "Microsoft Graph",
-        "Stripe",
-        "Shopify API",
-      ],
+      name: "Backend",
+      skills: ["Node.js", "AWS", "Firebase", "PostgreSQL"],
     },
     {
-      name: "AI & Automation",
-      skills: [
-        "Claude API",
-        "OpenAI API",
-        "n8n",
-        "Prompt Engineering",
-      ],
+      name: "Integrations",
+      skills: ["Stripe", "Viator API", "FareHarbor API", "Booking.com", "SendGrid"],
+    },
+    {
+      name: "Infrastructure",
+      skills: ["Vercel", "GitHub Actions", "App Store deployment", "Google Analytics"],
     },
   ],
 };
 
 export const portfolioProjects: PortfolioProject[] = [
   {
-    id: "wmf-agent",
-    title: "WMF Agent Dashboard",
+    id: "creator-economy-app",
+    title: "Creator Economy App",
     description:
-      "AI-powered customer service agent for manufacturing — email classification, RFQ extraction, human-in-the-loop approval",
-    tech: ["Next.js", "Claude API", "n8n", "Microsoft Graph"],
+      "Creator economy livestreaming platform with Stripe Connect payments — viewer tips, creator dashboards, and split-payment payouts.",
+    outcome:
+      "End-to-end payment flow from viewer tip to creator payout via Stripe Connect split payments",
+    tech: ["Next.js", "TypeScript", "Tailwind", "Stripe Connect"],
+    relevance:
+      "Payment integration architecture maps directly to your booking/commission model with Viator and FareHarbor",
   },
   {
-    id: "lead-crm",
-    title: "Lead Intake CRM",
+    id: "lynt-marketplace",
+    title: "Lynt Marketplace",
     description:
-      "Lead intake form, CRM dashboard, lead scoring, pipeline management, and automation rules",
+      "Digital marketplace platform with product listings, vendor management, and transaction tracking.",
+    outcome:
+      "Full marketplace architecture — vendor onboarding, listing management, and transaction tracking ready for production",
     tech: ["Next.js", "TypeScript", "Tailwind", "shadcn/ui"],
+    relevance:
+      "Marketplace architecture matches your OTA integration and partner discount system",
+    liveUrl: "https://lynt-marketplace.vercel.app",
   },
   {
-    id: "fleet-saas",
-    title: "Fleet Maintenance SaaS",
+    id: "event-planner-saas",
+    title: "Event Planner SaaS",
     description:
-      "Asset tracking, work orders, preventive maintenance, inspections, parts inventory, analytics",
-    tech: ["Next.js", "Recharts", "TypeScript", "shadcn/ui"],
+      "Full-stack event management platform with dashboard, CRUD operations, calendar integration, and attendee tracking.",
+    outcome:
+      "Calendar-driven event management with full CRUD, attendee tracking, and check-in workflows",
+    tech: ["Next.js", "TypeScript", "Tailwind", "shadcn/ui"],
+    relevance:
+      "Calendar-based booking and check-in flow maps directly to your ride scheduling system",
+  },
+  {
+    id: "ebay-pokemon-monitor",
+    title: "eBay Pokemon Monitor",
+    description:
+      "eBay Browse API monitoring tool for Pokemon card listings with instant Discord alerts and price tracking.",
+    outcome:
+      "Real-time listing monitor with webhook-based Discord alerts and price trend tracking",
+    tech: ["Next.js", "TypeScript", "Tailwind", "shadcn/ui"],
+    relevance:
+      "REST API and webhook patterns are the same architecture needed for Viator / FareHarbor / Booking.com OTA integrations",
+    liveUrl: "https://ebay-pokemon-monitor.vercel.app",
   },
 ];

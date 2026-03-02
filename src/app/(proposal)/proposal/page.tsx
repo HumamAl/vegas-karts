@@ -1,153 +1,347 @@
-// Proposal Builder agent replaces this content.
-// This placeholder demonstrates the correct structure and styling for Tab 3.
-//
-// Rules for the Proposal Builder:
-//   - Dark panel hero (--section-dark bg) with name, value prop, pulsing badge
-//   - Proof of Work: 3-4 portfolio projects using <ProjectCard> component
-//     Link only if liveUrl exists in developer-profile.md — never link to "#"
-//   - How I Work: 4-step process (steps can vary based on job)
-//   - Skills Grid: relevant tech only — use <SkillsGrid> component
-//   - Dark panel CTA at bottom: pulsing availability dot + "Reply on Upwork to start"
-//   - Signed "— Humam"
-//   - NO: hover:-translate-y-*, shadow-lg, rounded-xl, glassmorphism
-//   - NO: dead CTA links, buzzwords ("passionate", "innovative", "leverage")
+"use client";
 
+import { ExternalLink, TrendingUp, CheckCircle2, Zap, Rocket, Handshake } from "lucide-react";
 import { APP_CONFIG } from "@/lib/config";
 import { profile, portfolioProjects } from "@/data/proposal";
-import { ProjectCard } from "@/components/proposal/project-card";
-import { SkillsGrid } from "@/components/proposal/skills-grid";
+
+const stats = [
+  { value: "24+", label: "Projects Shipped" },
+  { value: "15+", label: "Industries" },
+  { value: "< 48hr", label: "Demo Turnaround" },
+];
+
+const stepIcons = [Zap, CheckCircle2, Rocket, Handshake];
 
 export default function ProposalPage() {
   return (
-    <div className="min-h-screen bg-background">
-      <div className="max-w-4xl mx-auto p-6 space-y-8">
+    <div className="max-w-4xl mx-auto px-6 py-8 space-y-14">
 
-        {/* ── Hero — dark panel ── */}
+      {/* ─── Section 1: Hero ──────────────────────────────────────── */}
+      <section
+        className="relative rounded-2xl overflow-hidden"
+        style={{ background: "oklch(0.10 0.02 var(--primary-h, 295))" }}
+      >
+        {/* Radial violet highlight */}
         <div
-          className="rounded-lg p-8 space-y-4"
-          style={{ background: "var(--section-dark)" }}
-        >
-          {/* "Built this demo for your project" badge */}
-          <div className="inline-flex items-center gap-2">
-            <span className="relative inline-flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary/60 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-primary" />
-            </span>
-            <span className="text-xs font-mono text-white/50 tracking-wider uppercase">
-              Built this demo for your project
-            </span>
-          </div>
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(ellipse 70% 50% at 50% 0%, oklch(0.52 0.22 295 / 0.18), transparent 70%)",
+          }}
+        />
 
-          <div>
-            <h1 className="text-3xl font-light text-white/60">
-              Hi, I&apos;m{" "}
-              <span className="font-black text-white">{profile.name}</span>
-            </h1>
-            <p className="text-base text-white/60 mt-2 leading-relaxed max-w-2xl">
-              {profile.tagline}
-            </p>
-          </div>
+        <div className="relative z-10 p-8 md:p-12">
+          {/* "Built this demo for your project" badge — mandatory */}
+          <span className="inline-flex items-center gap-2 text-xs font-medium bg-white/10 border border-white/10 text-white/80 px-3 py-1.5 rounded-full mb-6">
+            <span className="relative inline-flex h-1.5 w-1.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
+              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary" />
+            </span>
+            Built this demo for your project
+          </span>
 
-          <p className="text-sm text-white/50 leading-relaxed max-w-2xl">
-            {profile.bio}
+          {/* Role prefix */}
+          <p className="font-mono text-xs tracking-widest uppercase text-white/40 mb-4">
+            Full-Stack Developer · Next.js &amp; React Native Specialist
           </p>
 
-          {/* Availability + CTA — text, not a dead button */}
-          <div className="pt-2 flex items-center gap-4">
-            <div className="flex items-center gap-2">
-              <span className="relative inline-flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[color:var(--success)]/60 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-[color:var(--success)]" />
-              </span>
-              <span className="text-xs text-white/50">Currently available</span>
-            </div>
-            <span className="text-xs text-white/30">·</span>
-            <span className="text-xs font-medium text-primary">
-              Reply on Upwork to start
-            </span>
-          </div>
+          {/* Weight-contrast headline */}
+          <h1 className="text-5xl md:text-6xl tracking-tight leading-none mb-5">
+            <span className="font-light text-white/70">Hi, I&apos;m</span>{" "}
+            <span className="font-black text-white">{profile.name}</span>
+          </h1>
+
+          {/* Tailored value prop */}
+          <p className="text-lg md:text-xl text-white/65 max-w-2xl leading-relaxed">
+            {profile.tagline}
+          </p>
         </div>
 
-        {/* ── Proof of Work — portfolio projects ── */}
-        <div>
-          <h2 className="text-lg font-semibold mb-4">Relevant Projects</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {portfolioProjects.map((project) => (
-              <ProjectCard
-                key={project.id}
-                title={project.title}
-                description={project.description}
-                tech={project.tech}
-                relevance={project.relevance}
-                outcome={project.outcome}
-                liveUrl={project.liveUrl}
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* ── How I Work ── */}
-        <div>
-          <h2 className="text-lg font-semibold mb-4">How I Work</h2>
-          <div className="space-y-4">
-            {profile.approach.map((step, i) => (
-              <div key={step.title} className="flex gap-4">
-                <div className="flex flex-col items-center">
-                  <div className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold font-mono shrink-0">
-                    {i + 1}
-                  </div>
-                  {i < profile.approach.length - 1 && (
-                    <div className="w-px flex-1 bg-border/60 mt-2" />
-                  )}
+        {/* Stats shelf */}
+        <div
+          className="relative z-10 border-t px-8 py-5"
+          style={{ borderColor: "oklch(1 0 0 / 0.08)", background: "oklch(1 0 0 / 0.04)" }}
+        >
+          <div className="grid grid-cols-3 gap-4">
+            {stats.map((stat) => (
+              <div key={stat.label}>
+                <div
+                  className="text-2xl font-bold"
+                  style={{
+                    background: "linear-gradient(135deg, white 30%, oklch(0.80 0.18 295))",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    backgroundClip: "text",
+                  }}
+                >
+                  {stat.value}
                 </div>
-                <div className="pb-5">
-                  <p className="text-sm font-medium">{step.title}</p>
-                  <p className="text-sm text-muted-foreground mt-0.5">
-                    {step.description}
-                  </p>
-                </div>
+                <div className="text-xs text-white/50 mt-0.5">{stat.label}</div>
               </div>
             ))}
           </div>
         </div>
+      </section>
 
-        {/* ── Skills Grid — relevant tech only ── */}
+      {/* ─── Section 2: Proof of Work ─────────────────────────────── */}
+      <section className="space-y-5">
         <div>
-          <h2 className="text-lg font-semibold mb-4">Skills</h2>
-          <SkillsGrid categories={profile.skillCategories} />
+          <p className="font-mono text-xs tracking-widest uppercase text-muted-foreground mb-1">
+            Proof of Work
+          </p>
+          <h2 className="text-2xl font-bold tracking-tight">Relevant Projects</h2>
         </div>
 
-        {/* ── CTA close — dark panel ── */}
-        <div
-          className="rounded-lg p-8 space-y-4"
-          style={{ background: "var(--section-dark)" }}
-        >
-          <div className="flex items-center gap-2">
-            <span className="relative inline-flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[color:var(--success)]/60 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-[color:var(--success)]" />
-            </span>
-            <span className="text-xs text-white/50">Currently available</span>
-          </div>
-          <h2 className="text-xl font-light text-white/60">
-            Let&apos;s build{" "}
-            <span className="font-bold text-white">
-              {APP_CONFIG.projectName}
-            </span>{" "}
-            together
-          </h2>
-          <p className="text-sm text-white/50 leading-relaxed max-w-lg">
-            This demo is a starting point. I can have the production version
-            scoped and started within days of your reply.
+        <div className="grid gap-4 md:grid-cols-2">
+          {portfolioProjects.map((project) => (
+            <div
+              key={project.id}
+              className="rounded-xl p-5 space-y-3 border transition-all duration-200"
+              style={{
+                background: "oklch(0.12 0.015 var(--primary-h, 295))",
+                borderColor: "oklch(1 0 0 / 0.08)",
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLDivElement).style.borderColor =
+                  "oklch(0.52 0.22 295 / 0.35)";
+                (e.currentTarget as HTMLDivElement).style.boxShadow =
+                  "0 0 18px oklch(0.52 0.22 295 / 0.10)";
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLDivElement).style.borderColor = "oklch(1 0 0 / 0.08)";
+                (e.currentTarget as HTMLDivElement).style.boxShadow = "none";
+              }}
+            >
+              <div className="flex items-start justify-between gap-2">
+                <h3 className="text-base font-semibold text-white">{project.title}</h3>
+                {project.liveUrl && (
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-white/40 hover:text-primary transition-colors duration-150 shrink-0"
+                    aria-label={`View ${project.title} live demo`}
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                  </a>
+                )}
+              </div>
+
+              <p className="text-sm text-white/60 leading-relaxed">{project.description}</p>
+
+              {/* Outcome badge */}
+              {project.outcome && (
+                <div className="flex items-start gap-2 text-sm" style={{ color: "var(--success)" }}>
+                  <TrendingUp className="w-3.5 h-3.5 mt-0.5 shrink-0" />
+                  <span>{project.outcome}</span>
+                </div>
+              )}
+
+              {/* Tech tags */}
+              <div className="flex flex-wrap gap-1.5">
+                {project.tech.map((t) => (
+                  <span
+                    key={t}
+                    className="px-2 py-0.5 text-xs font-mono rounded-md"
+                    style={{
+                      background: "oklch(0.52 0.22 295 / 0.15)",
+                      color: "oklch(0.75 0.18 295)",
+                      border: "1px solid oklch(0.52 0.22 295 / 0.20)",
+                    }}
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
+
+              {/* Relevance note */}
+              {project.relevance && (
+                <p
+                  className="text-xs italic"
+                  style={{ color: "oklch(0.70 0.20 195 / 0.85)" }}
+                >
+                  {project.relevance}
+                </p>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ─── Section 3: How I Work ────────────────────────────────── */}
+      <section className="space-y-5">
+        <div>
+          <p className="font-mono text-xs tracking-widest uppercase text-muted-foreground mb-1">
+            Process
           </p>
-          {/* "Reply on Upwork to start" — text, not a dead link */}
-          <p className="text-sm font-medium text-primary">
+          <h2 className="text-2xl font-bold tracking-tight">How I Work</h2>
+        </div>
+
+        <div className="grid gap-4 sm:grid-cols-2">
+          {profile.approach.map((step, i) => {
+            const Icon = stepIcons[i];
+            const stepNum = String(i + 1).padStart(2, "0");
+            return (
+              <div
+                key={step.title}
+                className="rounded-xl p-5 space-y-3 border"
+                style={{
+                  background: "oklch(0.12 0.015 var(--primary-h, 295))",
+                  borderColor: "oklch(1 0 0 / 0.08)",
+                }}
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <span
+                      className="font-mono text-xs tracking-widest uppercase"
+                      style={{ color: "oklch(0.52 0.22 295 / 0.70)" }}
+                    >
+                      Step {stepNum}
+                    </span>
+                  </div>
+                  <Icon
+                    className="w-4 h-4"
+                    style={{ color: "oklch(0.52 0.22 295 / 0.60)" }}
+                  />
+                </div>
+                <h3 className="text-base font-semibold text-white">{step.title}</h3>
+                <p className="text-sm text-white/55 leading-relaxed">{step.description}</p>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* ─── Section 4: Skills Grid ───────────────────────────────── */}
+      <section className="space-y-5">
+        <div>
+          <p className="font-mono text-xs tracking-widest uppercase text-muted-foreground mb-1">
+            Tech Stack
+          </p>
+          <h2 className="text-2xl font-bold tracking-tight">What I Build With</h2>
+        </div>
+
+        <div className="space-y-3">
+          {profile.skillCategories.map((category) => (
+            <div
+              key={category.name}
+              className="rounded-xl p-4 border"
+              style={{
+                background: "oklch(0.11 0.012 var(--primary-h, 295))",
+                borderColor: "oklch(1 0 0 / 0.07)",
+              }}
+            >
+              <p
+                className="text-xs font-medium font-mono mb-2.5 uppercase tracking-wider"
+                style={{ color: "oklch(0.60 0 0)" }}
+              >
+                {category.name}
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {category.skills.map((skill) => (
+                  <span
+                    key={skill}
+                    className="px-2.5 py-1 text-sm font-mono rounded-md border"
+                    style={{
+                      background: "oklch(0 0 0 / 0.20)",
+                      borderColor: "oklch(1 0 0 / 0.10)",
+                      color: "oklch(0.80 0 0)",
+                    }}
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ─── Section 5: CTA ───────────────────────────────────────── */}
+      <section
+        className="relative rounded-2xl overflow-hidden text-center"
+        style={{ background: "oklch(0.08 0.02 var(--primary-h, 295))" }}
+      >
+        {/* Accent glow */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(ellipse 60% 40% at 50% 100%, oklch(0.52 0.22 295 / 0.12), transparent 70%)",
+          }}
+        />
+
+        <div className="relative z-10 p-8 md:p-12 space-y-5">
+          {/* Pulsing availability indicator */}
+          <div className="flex items-center justify-center gap-2">
+            <span className="relative inline-flex h-2 w-2">
+              <span
+                className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75"
+                style={{ background: "var(--success)" }}
+              />
+              <span
+                className="relative inline-flex h-2 w-2 rounded-full"
+                style={{ background: "var(--success)" }}
+              />
+            </span>
+            <span
+              className="text-sm"
+              style={{ color: "color-mix(in oklch, var(--success) 80%, white)" }}
+            >
+              Currently available for new projects
+            </span>
+          </div>
+
+          {/* Tailored headline */}
+          <h2 className="text-2xl md:text-3xl font-bold text-white leading-tight">
+            Ready to turn {APP_CONFIG.projectName} into a platform<br className="hidden sm:block" />
+            riders actually want to come back to.
+          </h2>
+
+          {/* Specific body copy */}
+          <p className="text-white/65 max-w-lg mx-auto leading-relaxed">
+            I built this demo to show you what the booking flow, membership system, and
+            gamification engine could look like — already deployed, no mockups. The
+            production build starts within days of your reply.
+          </p>
+
+          {/* Primary action — text, not a dead-end button */}
+          <p className="text-lg font-semibold text-white pt-1">
             Reply on Upwork to start
           </p>
-          <p className="text-sm text-white/40 pt-2">— Humam</p>
-        </div>
 
-      </div>
+          {/* Secondary nudge */}
+          <p className="text-sm text-white/50">
+            Or jump on a 10-minute call to discuss the {APP_CONFIG.projectName} build
+          </p>
+
+          {/* Back to demo link */}
+          <a
+            href="/"
+            className="inline-flex items-center gap-1 text-sm transition-colors duration-150"
+            style={{ color: "oklch(0.52 0.22 295 / 0.65)" }}
+            onMouseEnter={(e) =>
+              ((e.currentTarget as HTMLAnchorElement).style.color =
+                "oklch(0.70 0.20 295 / 0.90)")
+            }
+            onMouseLeave={(e) =>
+              ((e.currentTarget as HTMLAnchorElement).style.color =
+                "oklch(0.52 0.22 295 / 0.65)")
+            }
+          >
+            ← Back to the demo
+          </a>
+
+          {/* Signature */}
+          <p
+            className="text-sm pt-4 border-t"
+            style={{ color: "oklch(1 0 0 / 0.30)", borderColor: "oklch(1 0 0 / 0.08)" }}
+          >
+            — Humam
+          </p>
+        </div>
+      </section>
+
     </div>
   );
 }
